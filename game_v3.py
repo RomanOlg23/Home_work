@@ -1,27 +1,9 @@
+""" Игра угадай число
+Компьютер самостоятельно загадывает и угадывает число менее чем за 20 попыток"""
+
 import numpy as np
 
-def random_predict(number: int = 1) -> int:
-    """Просто угадываем на random, никак не используя информацию о больше или меньше.
-       Функция принимает загаданное число и возвращает число попыток
-
-    Args:
-        number (int, optional): Загаданное число. Defaults to 1.
-
-    Returns:
-        int: Число попыток
-    """
-    count = 0
-
-    while True:
-        count += 1
-        predict_number = np.random.randint(1, 101)  # предполагаемое число
-        if number == predict_number:
-            break  # выход из цикла если угадали
-    
-    return count
-print(random_predict())
-
-def game_core_v3(number: int = 1) -> int:
+def game_score_v3(number: int = 1) -> int:
     """Рандомно угадываем число
 
     Args:
@@ -46,7 +28,6 @@ def game_core_v3(number: int = 1) -> int:
             begin = aver_num
 
     return count
-print(game_core_v3())
 
 def score_game(random_predict) -> int:
     """За какое количество попыток в среднем за 10000 подходов угадывает наш алгоритм
@@ -65,9 +46,12 @@ def score_game(random_predict) -> int:
         count_ls.append(random_predict(number))
 
     score = int(np.mean(count_ls))
-    print(f"Ваш алгоритм угадывает число в среднем за: {score} попытки")
+    print(f"Ваш алгоритм угадывает число в среднем за: {score} попыток")
     
-#Run benchmarking to score effectiveness of algorithm
+    return score
 
-print('Run benchmarking for game_core_v3: ', end='')
-score_game(game_core_v3)
+print('Run benchmarking for game_score_v3: ', end='')
+
+# RUN
+if __name__ == '__main__':
+    score_game(game_score_v3)
